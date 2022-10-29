@@ -2,8 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import classes from './ProductItem.module.css';
-import img from '../../../assets/product2.jpg';
-import img2 from '../../../assets/aboutUsBoy4.webp';
+
 
 const ProductItem = props => {
     const [mouseIn, setMouseIn] = useState(false);
@@ -16,12 +15,13 @@ const ProductItem = props => {
         setMouseIn(prevState => !prevState);
     };
 
+
     let imgContent;
 
     if (!mouseIn) {
-        imgContent = img;
+        imgContent = props.images[0];
     } else {
-        imgContent = img2;
+        imgContent = props.images[1];
     }
 
     return (
@@ -32,14 +32,13 @@ const ProductItem = props => {
                 onMouseEnter={mouseInHandler}
                 onMouseOut={mouseOutHandler}>
                 <div className={`w-full h-52 xs:h-96 flex max-h-[300px] rounded-md ${classes.productImg}`}
-                    style={{ backgroundImage: `url(${imgContent})` }}>
-                    {/* <img src={imgContent} alt='Product Picture' className={`w-full flex ${classes.productImg}`} /> */}
+                    style={{ backgroundImage: `url('${imgContent}')` }}>
                 </div>
                 <span className={`text-lg ml-2 font-semibold ${classes.productName}`}>
-                    hello there
+                    {props.name}
                 </span>
                 <span className='font-semibold ml-2 text-xl'>
-                    25$
+                    {props.price}$
                 </span>
             </Link>
         </div>
