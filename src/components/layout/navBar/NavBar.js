@@ -20,7 +20,7 @@ const NavBar = () => {
     };
 
     return (
-        <nav className='flex flex-col sticky top-0 left-0'>
+        <nav className='flex flex-col sticky top-0 left-0 z-[999]'>
             <div
                 className={`h-14 md:h-24 bg-white flex items-center justify-between md:justify-start 
                 p-4 lg:px-24 z-[99999] w-full ${scroll && !menuIsOpen ? 'shadow-xl' : ''} transition-all duration-200`}>

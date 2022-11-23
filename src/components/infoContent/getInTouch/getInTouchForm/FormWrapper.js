@@ -54,7 +54,7 @@ const FormWrapper = () => {
                 </label>
                 <textarea
                     ref={messageInputRef}
-                    className='bg-[#f4f4f4] p-3 resize-none'
+                    className='bg-[#f4f4f4] p-3 rounded-md resize-none'
                     id='message'
                     placeholder='Your message'
                     required
