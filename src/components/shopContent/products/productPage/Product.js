@@ -1,24 +1,35 @@
+import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 
+import cart from '../../../../store/cart-context';
 import ProductForm from './ProductForm';
 import ProductSwiper from './ProductSwiper';
 
 const Product = props => {
-    const productId = useParams().productId;
-   // const product = props.products[productId - 1];
+    const cartCTX = useContext(cart);
 
-    const formSubmitHandler = id => {
-        console.log(id);
+    const productId = useParams().productId;
+
+    const product = props.products[productId - 1];
+
+    const formSubmitHandler = size => {
+        cartCTX.additem({
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            quantity: '1',
+            size: size
+        });
     };
 
     return (
-        <section className='w-full flex flex-col-reverse xs:flex-row px-4'>
-            <div className='w-full xs:w-2/3 p-2'>
-                <ProductSwiper />
+        <section className='w-full flex flex-col-reverse sm:flex-row sm:justify-around px-4'>
+            <div className='w-full sm:w-96 p-2'>
+                <ProductSwiper product={product} />
             </div>
-            <div className='w-full xs:w-1/3 p-2 flex flex-col gap-y-5 xs:gap-y-0 xs:justify-between'>
-                <span className='text-[22px] md:text-[26px] text-gray-800'>product name</span>
-                <span className='text-[22px] md:text-[26px] text-gray-800'>35.00$</span>
+            <div className='w-full sm:w-1/3 p-2 flex flex-col gap-y-5 sm:gap-y-0 sm:justify-between'>
+                <span className='text-[22px] md:text-[26px] text-gray-800'>{product?.name}</span>
+                <span className='text-[22px] md:text-[26px] text-gray-800'>{product?.price}$</span>
                 <ProductForm onSubmit={formSubmitHandler} />
             </div>
         </section>

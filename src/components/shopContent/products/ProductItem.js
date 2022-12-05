@@ -28,13 +28,14 @@ const ProductItem = props => {
         <div className='w-1/2 md:!w-1/3 lg:!w-1/4 px-4'>
             <Link
                 to={`/shop/${props.id}`}
-                className={`w-full flex flex-col items-start justify-center ${classes.productLink}`}
-                onMouseEnter={mouseInHandler}
-                onMouseOut={mouseOutHandler}>
-                <div className={`w-full h-52 xs:h-96 flex max-h-[300px] rounded-md ${classes.productImg}`}
-                    style={{ backgroundImage: `url('${imgContent}')` }}>
+                className={`w-full flex flex-col items-start justify-center ${classes.productLink}`}>
+                <div
+                    className={`w-full h-52 xs:h-96 flex max-h-[300px] rounded-md ${classes.productImg}`}
+                    style={{ backgroundImage: `url('${imgContent}')` }}
+                    onMouseEnter={mouseInHandler}
+                    onMouseOut={mouseOutHandler}>
                 </div>
-                <div className='w-full flex items-center justify-center'>
+                <div className='w-full flex items-center justify-center pt-5'>
                     <div className='w-full flex-col flex items-center justify-center'>
                         <span className={`text-gray-500 text-sm xs:text-md ml-2 font-semibold text-center w-full ${classes.productName}`}>
                             {props.name}

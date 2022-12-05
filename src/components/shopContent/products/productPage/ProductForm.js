@@ -34,6 +34,7 @@ const ProductForm = props => {
 
     return (
         <div className='flex flex-col gap-y-2'>
+            <span>Size</span>
             <form onSubmit={submitHandler} action='#' className='w-full flex flex-col gap-y-10'>
                 <div className='flex justify-around'>
                     <div className='flex flex-col'>

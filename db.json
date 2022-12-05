@@ -5,11 +5,9 @@
             "name": "nice cloth 1",
             "price": "35.00",
             "favorite": false,
-            "recomended": false,
-            "outDate": "2022-12-2",
             "images": [
-                "./assets/product2.jpg",
-                "./assets/aboutUsBoy4.webp"
+                "/assets/product2.jpg",
+                "/assets/aboutUsBoy4.webp"
             ]
         },
         {
@@ -17,11 +15,9 @@
             "name": "nice cloth 2",
             "price": "35.00",
             "favorite": false,
-            "recomended": false,
-            "outDate": "2022-12-2",
             "images": [
-                "./assets/product2.jpg",
-                "./assets/aboutUsBoy4.webp"
+                "/assets/product2.jpg",
+                "/assets/aboutUsBoy4.webp"
             ]
         },
         {
@@ -29,11 +25,9 @@
             "name": "nice cloth 3",
             "price": "35.00",
             "favorite": false,
-            "recomended": false,
-            "outDate": "2022-12-2",
             "images": [
-                "./assets/product2.jpg",
-                "./assets/aboutUsBoy4.webp"
+                "/assets/product2.jpg",
+                "/assets/aboutUsBoy4.webp"
             ]
         },
         {
@@ -41,11 +35,9 @@
             "name": "nice cloth 4",
             "price": "35.00",
             "favorite": false,
-            "recomended": false,
-            "outDate": "2022-12-2",
             "images": [
-                "./assets/product2.jpg",
-                "./assets/aboutUsBoy4.webp"
+                "/assets/product2.jpg",
+                "/assets/aboutUsBoy4.webp"
             ]
         }
     ]

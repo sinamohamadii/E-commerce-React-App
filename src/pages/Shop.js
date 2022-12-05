@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
+import { CartCTXProvider } from '../store/cart-context';
 import ShopHeader from '../components/layout/headers/ShopHeader';
 import ShopNavigation from '../components/shopContent/ShopNavigation';
 import ProductsWrapper from '../components/shopContent/products/ProductsWrapper';
 import ShopFooter from '../components/shopContent/ShopFooter';
 import Product from '../components/shopContent/products/productPage/Product';
+import ShoppingCart from '../components/shopContent/shoppingCart/ShoppingCart';
 
 const Shop = () => {
     const [products, setProducts] = useState([]);
@@ -38,16 +40,18 @@ const Shop = () => {
             <ShopHeader />
             <main className='w-full overflow-hidden flex flex-col gap-y-10 mt-7'>
                 <ShopNavigation />
-                <Routes>
-                    <Route
-                        path='/*'
-                        element={
-                            <ProductsWrapper products={products} loadingProducts={loadingProducts} hasError={hasError} />
-                        }
-                    />
-                    <Route path='/:productId' element={<Product products={products} />} />
-                    <Route path='/shopping-cart' element={<h1>hello there shop cart 2</h1>} />
-                </Routes>
+                <CartCTXProvider>
+                    <Routes>
+                        <Route
+                            path='/*'
+                            element={
+                                <ProductsWrapper products={products} loadingProducts={loadingProducts} hasError={hasError} />
+                            }
+                        />
+                        <Route path='/:productId' element={<Product products={products} />} />
+                        <Route path='/shopping-cart' element={<ShoppingCart />} />
+                    </Routes>
+                </CartCTXProvider>
             </main>
             <ShopFooter />
         </>

@@ -8,7 +8,9 @@ import "swiper/css/bundle";
 
 import { FreeMode, Navigation, Thumbs, Pagination } from 'swiper';
 
-export default function ProductSwiper() {
+export default function ProductSwiper(props) {
+    const product = props.product;
+    const images = product?.images;
 
     return (
         <Swiper
@@ -25,19 +27,14 @@ export default function ProductSwiper() {
             className='w-full h-96 rounded-md'
         >
             <SwiperSlide className='flex items-center justify-center'>
-                <img className='rounded-md w-full h-full object-cover' alt='Swiper' src='https://swiperjs.com/demos/images/nature-1.jpg' />
+                <div className={`w-full h-full rounded-md bg-center bg-no-repeat bg-cover`}
+                    style={{ backgroundImage: `url('../${images?.[0]}')` }}>
+                </div>
             </SwiperSlide>
             <SwiperSlide className='flex items-center justify-center'>
-                <img className='rounded-md w-full h-full object-cover' alt='Swiper' src='https://swiperjs.com/demos/images/nature-2.jpg' />
-            </SwiperSlide>
-            <SwiperSlide className='flex items-center justify-center'>
-                <img className='rounded-md w-full h-full object-cover' alt='Swiper' src='https://swiperjs.com/demos/images/nature-3.jpg' />
-            </SwiperSlide>
-            <SwiperSlide className='flex items-center justify-center'>
-                <img className='rounded-md w-full h-full object-cover' alt='Swiper' src='https://swiperjs.com/demos/images/nature-4.jpg' />
-            </SwiperSlide>
-            <SwiperSlide className='flex items-center justify-center'>
-                <img className='rounded-md w-full h-full object-cover' alt='Swiper' src='https://swiperjs.com/demos/images/nature-5.jpg' />
+                <div className={`w-full h-full rounded-md bg-center bg-no-repeat bg-cover`}
+                    style={{ backgroundImage: `url('../${images?.[1]}')` }}>
+                </div>
             </SwiperSlide>
         </Swiper>
     );

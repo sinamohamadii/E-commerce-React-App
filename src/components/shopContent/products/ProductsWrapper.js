@@ -24,9 +24,6 @@ const ProductsWrapper = props => {
                     </p>
                 }
             </div>
-            {!favoriteQ &&
-                <ProductsNavigation />
-            }
         </div>
     );
 };
