@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import { CartCTXProvider } from '../store/cart-context';
+import CartProvider from '../store/CartProvider';
 import ShopHeader from '../components/layout/headers/ShopHeader';
 import ShopNavigation from '../components/shopContent/ShopNavigation';
 import ProductsWrapper from '../components/shopContent/products/ProductsWrapper';
@@ -40,7 +40,7 @@ const Shop = () => {
             <ShopHeader />
             <main className='w-full overflow-hidden flex flex-col gap-y-10 mt-7'>
                 <ShopNavigation />
-                <CartCTXProvider>
+                <CartProvider>
                     <Routes>
                         <Route
                             path='/*'
@@ -51,7 +51,7 @@ const Shop = () => {
                         <Route path='/:productId' element={<Product products={products} />} />
                         <Route path='/shopping-cart' element={<ShoppingCart />} />
                     </Routes>
-                </CartCTXProvider>
+                </CartProvider>
             </main>
             <ShopFooter />
         </>
