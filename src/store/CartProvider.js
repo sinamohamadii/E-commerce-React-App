@@ -34,8 +34,6 @@ const cartReducer = (state, action) => {
 
             updatedTotalPrice = state.totalPrice + 1 * action.item.price;
 
-            console.log(updatedItems);
-
             return ({
                 items: updatedItems,
                 totalPrice: updatedTotalPrice
@@ -49,8 +47,6 @@ const cartReducer = (state, action) => {
         });
 
         updatedTotalPrice = state.totalPrice + 1 * updatedItems.find(el => el.id === action.item.id).totalPrice;
-
-        console.log(updatedItems);
 
         return ({
             items: updatedItems,
@@ -68,8 +64,6 @@ const cartReducer = (state, action) => {
         updatedItems = state.items.filter(el => el.id !== action.id);
 
         updatedTotalPrice = state.totalPrice - 1 * item.totalPrice;
-
-        console.log(updatedItems);
 
         return ({
             items: updatedItems,
@@ -142,8 +136,6 @@ const CartProvider = props => {
         removeItem: removeFromCartHandler,
         changeQuantity: changeQuantityCartHandler
     };
-
-    console.log(cartState.totalPrice);
 
     return (
         <cart.Provider value={cartItemObject}>

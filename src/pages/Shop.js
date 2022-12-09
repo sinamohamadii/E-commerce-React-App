@@ -10,30 +10,71 @@ import Product from '../components/shopContent/products/productPage/Product';
 import ShoppingCart from '../components/shopContent/shoppingCart/ShoppingCart';
 
 const Shop = () => {
-    const [products, setProducts] = useState([]);
+    const [products, setProducts] = useState([
+        {
+            "id": 1,
+            "name": "nice cloth 1",
+            "price": "35.00",
+            "favorite": false,
+            "images": [
+                "/assets/product2.jpg",
+                "/assets/aboutUsBoy4.webp"
+            ]
+        },
+        {
+            "id": 2,
+            "name": "nice cloth 2",
+            "price": "35.00",
+            "favorite": false,
+            "images": [
+                "/assets/product2.jpg",
+                "/assets/aboutUsBoy4.webp"
+            ]
+        },
+        {
+            "id": 3,
+            "name": "nice cloth 3",
+            "price": "35.00",
+            "favorite": false,
+            "images": [
+                "/assets/product2.jpg",
+                "/assets/aboutUsBoy4.webp"
+            ]
+        },
+        {
+            "id": 4,
+            "name": "nice cloth 4",
+            "price": "35.00",
+            "favorite": false,
+            "images": [
+                "/assets/product2.jpg",
+                "/assets/aboutUsBoy4.webp"
+            ]
+        }
+    ]);
     const [loadingProducts, setLoadingProducts] = useState(false);
     const [hasError, setHasError] = useState(null);
 
     useEffect(() => {
-        const getData = async () => {
-            setLoadingProducts(true);
+        // const getData = async () => {
+        //     setLoadingProducts(true);
 
-            const response = await fetch('http://localhost:3001/products');
+        //     const response = await fetch('http://localhost:3001/products');
 
-            if (!response.ok) {
-                setLoadingProducts(false);
-                throw new Error('Oops! something went wrong.');
-            }
+        //     if (!response.ok) {
+        //         setLoadingProducts(false);
+        //         throw new Error('Oops! something went wrong.');
+        //     }
 
-            const result = await response.json();
+        //     const result = await response.json();
 
-            setProducts(result);
+        //     setProducts(result);
 
-            setLoadingProducts(false);
+        //     setLoadingProducts(false);
 
-        };
+        // };
 
-        getData().catch(error => setHasError(error.message));
+        // getData().catch(error => setHasError(error.message));
     }, []);
 
     return (
@@ -41,7 +82,7 @@ const Shop = () => {
             <ShopHeader />
             <main className='w-full overflow-hidden flex flex-col gap-y-10 mt-7'>
                 <CartProvider>
-                <ShopNavigation />
+                    <ShopNavigation />
                     <Routes>
                         <Route
                             path='/*'
