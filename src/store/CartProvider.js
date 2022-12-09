@@ -8,64 +8,16 @@ const defaultCartState = {
 
 const cartReducer = (state, action) => {
     if (action.type === 'ADD') {
+
+        let updatedItems;
+        let updatedTotalPrice;
+
         const existItem = state.items.find(el => el.id === action.item.id);
         const existItemIndex = state.items.indexOf(existItem);
-
-        let updatedItems = state.items.concat({
-            ...action.item,
-            totalPrice: action.item.price * action.item.quantity
-        });
-        let updatedTotalPrice = state.totalPrice + updatedItems.find(el => el.id === action.item.id).totalPrice;
 
         if (existItem) {
             let updatedQuantity = state.items[existItemIndex].quantity + 1;
             let updatedTotalPriceOfItem = state.items[existItemIndex].price * updatedQuantity;
-
-            let existSizeItem = state.items.find(el => el.size === action.item.size);
-            let existSizeItemIndex = state.items.indexOf(existSizeItem);
-
-            if (!existSizeItem) {
-                updatedItems = state.items.concat({
-                    ...action.item,
-                    totalPrice: action.item.price * action.item.quantity
-                });
-
-                updatedTotalPrice = state.totalPrice + 1 * action.item.price;
-
-                console.log(updatedItems);
-
-                return ({
-                    items: updatedItems,
-                    totalPrice: updatedTotalPrice
-                });
-            }
-
-            if (existSizeItem) {
-                updatedQuantity = state.items[existSizeItemIndex].quantity + 1;
-                updatedTotalPriceOfItem = 1 * action.item.price * updatedQuantity;
-
-                let updatedItem = {
-                    ...state.items[existSizeItemIndex],
-                    quantity: updatedQuantity,
-                    totalPrice: updatedTotalPriceOfItem
-                }
-
-                updatedItems = state.items.map((el) => {
-                    if (el.id === action.item.id && el.size === action.item.size) {
-                        return updatedItem;
-                    }
-                    return el;
-                });
-
-                updatedTotalPrice = state.totalPrice + 1 * action.item.price;
-
-                console.log(updatedItems);
-
-                return ({
-                    items: updatedItems,
-                    totalPrice: updatedTotalPrice
-                });
-            }
 
             let updatedItem = {
                 ...state.items[existItemIndex],
@@ -90,7 +42,69 @@ const cartReducer = (state, action) => {
             });
         }
 
+        updatedItems = state.items.concat({
+            ...action.item,
+            quantity: 1,
+            totalPrice: action.item.price
+        });
+
+        updatedTotalPrice = state.totalPrice + 1 * updatedItems.find(el => el.id === action.item.id).totalPrice;
+
         console.log(updatedItems);
+
+        return ({
+            items: updatedItems,
+            totalPrice: updatedTotalPrice
+        });
+
+    }
+
+    if (action.type === 'REMOVE') {
+        let updatedItems;
+        let updatedTotalPrice;
+
+        const item = state.items.find(el => el.id === action.id);
+
+        updatedItems = state.items.filter(el => el.id !== action.id);
+
+        updatedTotalPrice = state.totalPrice - 1 * item.totalPrice;
+
+        console.log(updatedItems);
+
+        return ({
+            items: updatedItems,
+            totalPrice: updatedTotalPrice
+        });
+    }
+
+    if (action.type === 'CHANGE-QUANTITY') {
+        let updatedItems;
+        let updatedTotalPrice;
+
+        const item = state.items.find(el => el.id === action.id);
+
+        let updatedTotalPriceOfItem;
+        let updatedItem;
+
+        updatedTotalPriceOfItem = action.newQuantity * item.price;
+        updatedItem = {
+            ...item,
+            quantity: action.newQuantity,
+            totalPrice: updatedTotalPriceOfItem
+        };
+
+        updatedItems = state.items.map(el => {
+            if (el.id === action.id) {
+                return updatedItem;
+            }
+            return el;
+        });
+
+        if (item.totalPrice > updatedTotalPriceOfItem) {
+            updatedTotalPrice = state.totalPrice - (item.totalPrice - updatedTotalPriceOfItem);
+        } else {
+            updatedTotalPrice = state.totalPrice + (updatedTotalPriceOfItem - item.totalPrice);
+        }
 
         return ({
             items: updatedItems,
@@ -106,51 +120,20 @@ const CartProvider = props => {
 
     const addToCartHandler = item => {
         cartDispatch({ type: 'ADD', item: item });
-
-        // const existItem = cartItemObject.items.find(el => el.id === item.id);
-        // const existItemIndex = cartItemObject.items.indexOf(existItem);
-
-        // if (existItem) {
-        //     const existSizeItem = cartItemObject.items.find(el => el.size === item.size);
-        //     const existSizeItemIndex = cartItemObject.items.indexOf(existSizeItem);
-
-        //     if (!existSizeItem) {
-        //         cartItemObject.items.push({
-        //             ...item,
-        //             totalPrice: item.price * item.quantity
-        //         });
-        //         console.log(cartItemObject.items);
-        //         console.log(cartItemObject.totalPrice);
-        //         return;
-        //     }
-
-        //     if (existSizeItem) {
-        //         cartItemObject.items[existSizeItemIndex].quantity = 1 * existSizeItem.quantity + 1 * item.quantity;
-        //         cartItemObject.items[existSizeItemIndex].totalPrice = cartItemObject.items[existSizeItemIndex].quantity * cartItemObject.items[existSizeItemIndex].price;
-        //         console.log(cartItemObject.items);
-        //         console.log(cartItemObject.totalPrice);
-        //         return;
-        //     }
-
-        //     cartItemObject.items[existItemIndex].quantity = 1 * existItem.quantity + 1 * item.quantity;
-        //     cartItemObject.items[existItemIndex].totalPrice = cartItemObject.items[existItemIndex].quantity * cartItemObject.items[existItemIndex].price;
-        //     console.log(cartItemObject.items);
-        //     console.log(cartItemObject.totalPrice);
-        //     return;
-        // }
-
-        // cartItemObject.items.push({
-        //     ...item,
-        //     totalPrice: item.price * item.quantity
-        // });
-
-        // console.log(cartItemObject.items);
-        // console.log(cartItemObject.totalPrice);
     };
 
-    const removeFromCartHandler = id => { };
+    const removeFromCartHandler = id => {
+        cartDispatch({ type: 'REMOVE', id: id });
+    };
 
-    const changeQuantityCartHandler = id => { };
+    const changeQuantityCartHandler = (id, price, newQuantity) => {
+        cartDispatch({
+            type: 'CHANGE-QUANTITY',
+            id: id,
+            price: price,
+            newQuantity: newQuantity
+        });
+    };
 
     const cartItemObject = {
         items: cartState.items,

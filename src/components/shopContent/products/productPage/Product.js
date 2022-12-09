@@ -14,11 +14,11 @@ const Product = props => {
 
     const formSubmitHandler = size => {
         cartCTX.additem({
-            id: product.id,
+            id: `${product.id}-${size}`,
             name: product.name,
             price: product.price,
-            quantity: 1,
-            size: size
+            size: size,
+            images: product.images
         });
     };
 

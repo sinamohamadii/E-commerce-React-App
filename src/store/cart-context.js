@@ -5,7 +5,7 @@ const cart = React.createContext({
     totalPrice: 0,
     additem(item) { },
     removeItem(id) { },
-    changeQuantity() { }
+    changeQuantity(id, price, newQuantity) { }
 });
 
 export default cart;

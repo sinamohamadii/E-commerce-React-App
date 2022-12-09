@@ -21,7 +21,7 @@ const ProductForm = props => {
 
         for (let i = 0; i < inputs.length; i++) {
             if (inputs[i].current.checked) {
-                checkedSize = inputs[i].current.id;
+                checkedSize = inputs[i].current.value;
             }
         }
 

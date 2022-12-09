@@ -30,6 +30,7 @@ const Shop = () => {
             setProducts(result);
 
             setLoadingProducts(false);
+
         };
 
         getData().catch(error => setHasError(error.message));
@@ -39,8 +40,8 @@ const Shop = () => {
         <>
             <ShopHeader />
             <main className='w-full overflow-hidden flex flex-col gap-y-10 mt-7'>
-                <ShopNavigation />
                 <CartProvider>
+                <ShopNavigation />
                     <Routes>
                         <Route
                             path='/*'

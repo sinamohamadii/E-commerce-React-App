@@ -1,6 +1,11 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
+import cart from '../../store/cart-context';
+
 const ShopNavigation = () => {
+    const cartCTX = useContext(cart);
+
     return (
         <div className='w-full flex gap-x-5 items-center justify-center'>
             <Link to='/shop?fav=true' className='flex flex-col items-center justify-center text-gray-700'>
@@ -19,7 +24,7 @@ const ShopNavigation = () => {
                     </svg>
                 </span>
                 <span>Shopping Bag</span>
-                <span>(0)</span>
+                <span>({cartCTX.items.length})</span>
             </Link>
         </div>
     );
